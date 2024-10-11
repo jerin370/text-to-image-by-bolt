@@ -1,7 +1,13 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, BarChart2, Cloud, Shield, Image } from "lucide-react"
-import Link from "next/link"
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { ArrowRight, BarChart2, Cloud, Shield, Image } from 'lucide-react';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -31,7 +37,8 @@ export default function Home() {
           Streamline Your Business with SaaSify
         </h1>
         <p className="mx-auto mb-10 max-w-2xl text-xl text-muted-foreground">
-          Boost productivity, enhance collaboration, and drive growth with our all-in-one SaaS solution.
+          Boost productivity, enhance collaboration, and drive growth with our
+          all-in-one SaaS solution.
         </p>
         <div className="flex justify-center space-x-4">
           <Button size="lg" asChild>
@@ -42,6 +49,11 @@ export default function Home() {
           <Button size="lg" variant="outline" asChild>
             <Link href="/text-to-image">
               Try Image Generator <Image className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" asChild>
+            <Link href="/image-analysis">
+              Try Image Analyser <Image className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
@@ -77,23 +89,35 @@ export default function Home() {
 
       <section id="pricing" className="py-16">
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">Pricing Plans</h2>
+          <h2 className="mb-12 text-center text-3xl font-bold">
+            Pricing Plans
+          </h2>
           <div className="grid gap-8 md:grid-cols-3">
             <PricingCard
               title="Basic"
               price="$9.99"
-              features={["5 Users", "10GB Storage", "Basic Support"]}
+              features={['5 Users', '10GB Storage', 'Basic Support']}
             />
             <PricingCard
               title="Pro"
               price="$29.99"
-              features={["25 Users", "100GB Storage", "Priority Support", "Advanced Analytics"]}
+              features={[
+                '25 Users',
+                '100GB Storage',
+                'Priority Support',
+                'Advanced Analytics',
+              ]}
               highlighted
             />
             <PricingCard
               title="Enterprise"
               price="Custom"
-              features={["Unlimited Users", "Unlimited Storage", "24/7 Support", "Custom Integration"]}
+              features={[
+                'Unlimited Users',
+                'Unlimited Storage',
+                '24/7 Support',
+                'Custom Integration',
+              ]}
             />
           </div>
         </div>
@@ -105,10 +129,18 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function FeatureCard({
+  icon,
+  title,
+  description,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}) {
   return (
     <Card>
       <CardHeader>
@@ -119,17 +151,29 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode; titl
         <CardDescription>{description}</CardDescription>
       </CardContent>
     </Card>
-  )
+  );
 }
 
-function PricingCard({ title, price, features, highlighted = false }: { title: string; price: string; features: string[]; highlighted?: boolean }) {
+function PricingCard({
+  title,
+  price,
+  features,
+  highlighted = false,
+}: {
+  title: string;
+  price: string;
+  features: string[];
+  highlighted?: boolean;
+}) {
   return (
-    <Card className={highlighted ? "border-primary shadow-lg" : ""}>
+    <Card className={highlighted ? 'border-primary shadow-lg' : ''}>
       <CardHeader>
         <CardTitle>{title}</CardTitle>
         <CardDescription>
           <span className="text-3xl font-bold">{price}</span>
-          {price !== "Custom" && <span className="text-muted-foreground">/month</span>}
+          {price !== 'Custom' && (
+            <span className="text-muted-foreground">/month</span>
+          )}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -141,10 +185,13 @@ function PricingCard({ title, price, features, highlighted = false }: { title: s
             </li>
           ))}
         </ul>
-        <Button className="mt-6 w-full" variant={highlighted ? "default" : "outline"}>
+        <Button
+          className="mt-6 w-full"
+          variant={highlighted ? 'default' : 'outline'}
+        >
           Choose Plan
         </Button>
       </CardContent>
     </Card>
-  )
+  );
 }
