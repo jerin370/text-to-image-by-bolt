@@ -1,26 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import * as fal from "@fal-ai/serverless-client";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import * as fal from '@fal-ai/serverless-client';
+import Image from 'next/image';
 
 fal.config({
   credentials: process.env.FAL_KEY,
 });
 
 export default function TextToImage() {
-  const [prompt, setPrompt] = useState("");
-  const [imageUrl, setImageUrl] = useState("");
+  const [prompt, setPrompt] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   const generateImage = async () => {
     setIsLoading(true);
-    setError("");
+    setError('');
     try {
-      const result = await fal.subscribe("fal-ai/flux/dev", {
+      const result: any = await fal.subscribe('fal-ai/fast-sdxl', {
         input: {
           prompt,
         },
@@ -28,11 +29,11 @@ export default function TextToImage() {
       if (result.images && result.images.length > 0) {
         setImageUrl(result.images[0].url);
       } else {
-        throw new Error("No image generated");
+        throw new Error('No image generated');
       }
     } catch (error) {
-      console.error("Error generating image:", error);
-      setError("Failed to generate image. Please try again later.");
+      console.error('Error generating image:', error);
+      setError('Failed to generate image. Please try again later.');
     } finally {
       setIsLoading(false);
     }
@@ -53,7 +54,7 @@ export default function TextToImage() {
               onChange={(e) => setPrompt(e.target.value)}
             />
             <Button onClick={generateImage} disabled={isLoading || !prompt}>
-              {isLoading ? "Generating..." : "Generate Image"}
+              {isLoading ? 'Generating...' : 'Generate Image'}
             </Button>
             {error && <p className="text-red-500">{error}</p>}
           </div>
@@ -66,7 +67,11 @@ export default function TextToImage() {
             <CardTitle>Generated Image</CardTitle>
           </CardHeader>
           <CardContent>
-            <img src={imageUrl} alt="Generated" className="w-full h-auto rounded-lg shadow-lg" />
+            <Image
+              src={imageUrl}
+              alt="Generated"
+              className="w-full h-auto rounded-lg shadow-lg"
+            />
           </CardContent>
         </Card>
       )}
